@@ -1,0 +1,17 @@
+---
+- hosts: pvenodes
+  become: true
+
+  - name: Clone cloud-init template
+    community.general.proxmox_kvm:
+      node: pve1
+      vmid: 9000 # This happened to be the same value as my cloudinit VM
+      clone: LMDE-Template # Left this as is, later discovering the value doesn't matter since a vmid is specified above.
+      name: LMDE-Desktop-01
+      api_user: "{{ api_user }}"
+      api_token_id: "{{ api_token_id }}" 
+      api_token_secret: "{{ api_token_secret }}" 
+      api_host: 192.168.50.101 # 
+      storage: data
+      timeout: 90
+

@@ -1,5 +1,5 @@
 ---
-- hosts: pvenodes
+- hosts: proxmox
   become: true
 
   - name: Clone cloud-init template

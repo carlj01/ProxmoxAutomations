@@ -2,6 +2,7 @@
 - hosts: proxmox
   become: true
 
+  tasks:
   - name: Clone cloud-init template
     community.general.proxmox_kvm:
       node: pve1

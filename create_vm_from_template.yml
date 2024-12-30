@@ -3,17 +3,39 @@
   become: true
 
   tasks:
-  - name: Clone cloud-init template
+  - name: Clone LMDE-Template
     community.general.proxmox_kvm:
       node: pve1
       vmid: 9000 
       clone: LMDE-Template 
       name: LMDE-Desktop-01
-      net: 
-        net0: 'virtio=bc:24:11:01:27:05'
+      newid: 129
       api_user: "{{ api_user }}"
       api_token_id: "{{ api_token_id }}" 
       api_token_secret: "{{ api_token_secret }}" 
       api_host: 192.168.50.101 # 
       storage: data
       timeout: 90
+
+  - name: Delete net0
+    community.general.proxmox_nic:
+      api_host: 192.168.50.101 # 
+      api_user: "{{ api_user }}"
+      api_token_id: "{{ api_token_id }}" 
+      api_token_secret: "{{ api_token_secret }}" 
+      name: LMDE-Desktop-01
+      interface: net0
+      state: absent
+
+  - name: Create new net0
+    community.general.proxmox_nic:
+      api_host: 192.168.50.101 
+      api_user: "{{ api_user }}"
+      api_token_id: "{{ api_token_id }}" 
+      api_token_secret: "{{ api_token_secret }}" 
+      name: LMDE-Desktop-01
+      interface: net0
+      bridge: vmbr0
+      mac: "BC:24:11:01:27:05"
+      firewall: true
+      state: present

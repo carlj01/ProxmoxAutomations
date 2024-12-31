@@ -17,6 +17,17 @@
       storage: data
       timeout: 90
 
+  - name: Update ssh keys
+    community.general.proxmox_kvm:
+      node: pve1
+      name: LMDE-Desktop-01
+      api_user: "{{ api_user }}"
+      api_token_id: "{{ api_token_id }}" 
+      api_token_secret: "{{ api_token_secret }}" 
+      api_host: 192.168.50.101 # 
+      sshkeys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCx/4shc/zsRUki60r+fEKvrPfvvylEkK+b17QcQI6i0V+uFZv7KShpM1nNXcHw+JwdFnfmGexK3ukWo5ioCfuexKGMDcyGfWSjHZ36xQ78muYZDR770Zz+gi7qPPaK7QLLKOgD2OAR3ezaUeyKYa5PnFciKqR+++nSDA2W1/zfghQvKHg6NAtflTrD4MhEJ6UraPP/iyLx98FhfyKxE2BZkvi/a4rlM5v/Pff3T1ntm5TvrM9c++otS0vVj59S9VCjQ6Fv/G3iy71Dxa8HaUd0GLSp0jJ//+GYdUnHD8QvS0oeqDj8hFclg6fD4kvpO8K0gEw2qYdTHe6z3zlUqdTvWQtuCpcE5hE+5PQiie6OAgnbgp6xKj5dBnn3x9E7OrwKjztzy+sES9atlmE3IBZM13eUZzXia3qmE00l+DiAlh73blLvhVuNoBUfKFxUIuycdqrtGFlM4tiIV0Qg3Mt3/Lv8TiE4clFJlouKZ3fa65HYk/huHkNeTFe+YFpUCHU= carl@Faye"
+      update: true
+
   - name: Delete net0
     community.general.proxmox_nic:
       api_host: 192.168.50.101 # 
